@@ -1,7 +1,7 @@
 from audioop import add
 from flask import Flask, render_template, redirect, request, url_for, Blueprint, flash
-from sim.mahasiswa.forms import mahasiswa_F, loginmahasiswa_F, editmahasiswa_F, pengaduan_F, editpengaduan_F
-from sim.models import Tmahasiswa, Tpengaduan
+from sim.mahasiswa.forms import mahasiswa_F, loginmahasiswa_F, editmahasiswa_F, pengaduan_F, editpengaduan_F, surat_F, updatesurat_F
+from sim.models import Tmahasiswa, Tpengaduan, Tsurat
 from sim import db, bcrypt 
 from flask_login import login_user, current_user, logout_user, login_required
 import os
@@ -142,7 +142,6 @@ def update_pengaduan(ed_id):
         
     return render_template('edit_pengaduan.html', form=form)
 
-
 @rmahasiswa.route("/delete/<id>", methods=['GET','POST'])
 @login_required
 def hapus_pengaduan(id):
@@ -152,7 +151,39 @@ def hapus_pengaduan(id):
     flash('Data Anda berhasil di hapus', 'warning')
     return redirect(url_for('rmahasiswa.pengaduan'))
 
+@rmahasiswa.route("/pengaduan/<int:ed_id>/detail", methods=['GET','POST'])
+@login_required
+def detail_pengaduan(ed_id):
+    dt_pengaduan=Tpengaduan.query.get_or_404(ed_id)
+    return render_template("detail_pengaduan.html", dt_pengaduan=dt_pengaduan)
 
-@rmahasiswa.route("/artikel/<info>")
-def artikel_info(info):
-    return"Halaman Artikel " + info ; 
+#pendataan_surat
+
+@rmahasiswa.route("/surat", methods=['GET','POST'])
+@login_required
+def surat():
+    dt_surat=Tsurat.query.filter_by(mahasiswa_id=current_user.id)
+    form=surat_F()
+    if form.validate_on_submit():
+        flash('Data telah di submit', 'info')
+        return redirect(url_for('rmahasiswa.surat'))
+    return render_template("surat.html", form=form, dt_surat=dt_surat)
+
+@rmahasiswa.route("/update_surat/<int:ed_id>/update", methods=['GET','POST'])
+@login_required
+def update_surat(ed_id):
+    form=updatesurat_F()
+    dt_surat=Tsurat.query.get_or_404(ed_id)
+    if request.method=="GET":
+        form.date_surat.data=dt_surat.date_surat
+        form.kategori.data=dt_surat.kategori
+        form.detail_pengaduan.data=dt_surat.update_surat
+    elif form.validate_on_submit():
+        dt_surat.date_surat=form.date_surat.data
+        dt_surat.kategori=form.kategori.data
+        dt_surat.detail_pengaduan=form.update_surat.data
+        db.session.commit()
+        flash('data telah di ubah', 'warning')
+        return redirect(url_for('rmahasiswa.surat'))
+        
+    return render_template('surat.html', form=form)
