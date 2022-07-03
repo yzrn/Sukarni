@@ -71,19 +71,4 @@ class editpengaduan_F(FlaskForm):
     kategori= SelectField(u'kategori pengaudan', choices=[('administrasi','pelayanan administrasi'), ('fasilitas','Fasilitas'), ('dosen','dosen')], validators=[DataRequired()])
     detail_pengaduan= TextAreaField('Pengaduan', validators=[DataRequired()])
     submit=SubmitField('edit')
-    
-#pendataan_surat
-class surat_F(FlaskForm):
-    date_surat= StringField('Subjek', validators=[DataRequired()])
-    kategori= SelectField(u'kategori pengaudan', choices=[('administrasi','pelayanan administrasi'), ('fasilitas','Fasilitas'), ('dosen','dosen')], validators=[DataRequired()])
-    detail_pengaduan= TextAreaField('Pengaduan', validators=[DataRequired()])
-    submit=SubmitField('create')
-
-class updatesurat_F(FlaskForm):
-    date_surat= StringField('Subjek', validators=[DataRequired()])
-    kategori= SelectField(u'kategori pengaudan', choices=[('administrasi','pelayanan administrasi'), ('fasilitas','Fasilitas'), ('dosen','dosen')], validators=[DataRequired()])
-    detail_pengaduan= TextAreaField('Pengaduan', validators=[DataRequired()])
-    submit=SubmitField('update')
-
-
 

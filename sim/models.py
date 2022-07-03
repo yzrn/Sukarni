@@ -31,15 +31,3 @@ class Tpengaduan(db.Model):
 
 def __repr__(self):
     return f"Tpengaduan('{self.subjek}','{self.kategori}','{self.detail_pengaduan}','{self.tgl_post}','{self.mahasiswa_id}')"
-
-#pendataan_surat
-class Tsurat(db.Model):
-    id= db.Column(db.Integer, primary_key=True)
-    date_surat = db.Column(db.String(100), nullable=False)
-    kategori = db.Column(db.String(50), nullable=False)
-    detail_pengaduan = db.Column(db.String(300), nullable=False)
-    tgl_post = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    mahasiswa_id = db.Column (db.Integer, db.ForeignKey('tmahasiswa.id')) 
-
-def __repr__(self):
-    return f"Tsurat('{self.date_surat}','{self.kategori}','{self.detail_pengaduan}','{self.tgl_post}','{self.mahasiswa_id}')"

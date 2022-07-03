@@ -1,17 +1,17 @@
 <html>
     <head>
-        <title>Welcome home</title>
+        <title>selamat datang</title>
         <link rel="stylesheet" href="{{ url_for ('static', filename="css/bootstrap.min.css")}}" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href= "{{ url_for ('static', filename="css/style.css")}}">
+      
 
     </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-Info">
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning">
     <div class="container">
       <div class="container-fluid">
 
-      <a class="navbar-brand" href="#">YZRN WEBSITE</a>
+      <a class="navbar-brand" href="#">web</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -23,9 +23,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url_for('rmahasiswa.about')}}">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('rmahasiswa.registrasi')}}">Registrasi</a>
-          </li>
+    
 
           {% if current_user.is_authenticated %}
           {% else %}
@@ -88,7 +86,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item"> <a href="{{ url_for('rmahasiswa.akunmahasiswa')}}">Dasboard</li>
             <li class="list-group-item"><a href="{{ url_for('rmahasiswa.pengaduan')}}">pengaduan</a></li>
-            <li class="list-group-item"><a href="{{ url_for('rmahasiswa.surat')}}">Surat</a></li>
+            <li class="list-group-item">Vestibulum at eros</li>
           </ul>
           <div class="card-body">
             <a href="{{ url_for('rmahasiswa.edit_mahasiswa')}}" class="card-link">Update Profil Anda</a>
